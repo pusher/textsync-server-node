@@ -2,7 +2,10 @@ import { Instance, InstanceOptions } from 'pusher-platform-node';
 import { Permissions } from './permissions';
 import { default as Authorizer, TextSyncAuthResponse } from './authorizer';
 
-export type TextSyncOptions = InstanceOptions;
+export type TextSyncOptions = {
+  locator: string;
+  key: string;
+};
 export type PermissionsFunction = (documentId: string) => Permissions[];
 
 export default class TextSync {
@@ -10,7 +13,14 @@ export default class TextSync {
   authorizer: Authorizer;
 
   constructor(options: TextSyncOptions) {
-    this.instance = new Instance(options);
+    let instanceOptions: InstanceOptions = Object.assign(
+      {
+        serviceName: 'textsync',
+        serviceVersion: 'v1'
+      },
+      options
+    );
+    this.instance = new Instance(instanceOptions);
     this.authorizer = new Authorizer(this.instance);
   }
 
