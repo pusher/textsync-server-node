@@ -2,7 +2,7 @@
   "name": "textsync-server-node",
   "version": "0.0.1",
   "description": "Server library for TextSync",
-  "main": "dist/index.js",
+  "main": "index.js",
   "repository": "https://github.com/pusher/textsync-server-node",
   "author": "pusher",
   "license": "MIT",
@@ -10,13 +10,10 @@
     "pusher-platform-node": "^0.10.0"
   },
   "devDependencies": {
-    "@types/node": "^8.0.7",
-    "typescript": "^2.6.2"
+    "jest": "^22.1.4",
+    "prettier": "^1.10.2"
   },
-  "scripts" : {
-    "build:clean": "rm -rf dist && mkdir -p dist",
-    "build:tsc": "tsc",
-    "build": "yarn run build:clean && yarn run build:tsc",
-    "dev": "tsc --watch"
+  "scripts": {
+    "format": "prettier -w *.js lib/*.js"
   }
 }
