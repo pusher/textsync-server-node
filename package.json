@@ -1,0 +1,41 @@
+{
+  "name": "textsync-server-node",
+  "version": "0.0.1",
+  "description": "Server library for TextSync",
+  "main": "target/index.js",
+  "repository": "https://github.com/pusher/textsync-server-node",
+  "author": "pusher",
+  "license": "MIT",
+  "types": "target/index.d.ts",
+  "dependencies": {
+    "pusher-platform-node": "^0.10.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^22.1.0",
+    "@types/node": "^8.0.7",
+    "jest": "^22.1.4",
+    "ts-jest": "^22.0.1",
+    "prettier": "^1.10.2",
+    "typescript": "^2.6.2"
+  },
+  "scripts": {
+    "build": "yarn run build:clean && yarn run build:tsc",
+    "build:clean": "rm -rf target && mkdir -p target",
+    "build:tsc": "tsc",
+    "build:watch": "tsc --watch",
+    "format": "prettier src/**/*.ts",
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "js",
+      "json"
+    ]
+  }
+}
