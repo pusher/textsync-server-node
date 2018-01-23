@@ -10,13 +10,6 @@
     "pusher-platform-node": "^0.10.0"
   },
   "devDependencies": {
-    "@types/node": "^8.0.7",
-    "typescript": "^2.6.2"
-  },
-  "scripts" : {
-    "build:clean": "rm -rf dist && mkdir -p dist",
-    "build:tsc": "tsc",
-    "build": "yarn run build:clean && yarn run build:tsc",
-    "dev": "tsc --watch"
+    "jest": "^22.1.4"
   }
 }
