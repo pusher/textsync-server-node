@@ -10,13 +10,13 @@ when an authorization endpoint is configured.
 
 It's possible to import `textsync-server-node` using ES6 modules.
 
-```
+```js
 import TextSync from 'textsync-server-node';
 ```
 
 Commonjs is supported too
 
-```
+```js
 const TextSync = require('textsync-server-node');
 ```
 
@@ -29,7 +29,7 @@ The constructor takes a single options object with the following required keys:
 
 Both of which should be available from the keys page of your TextSync dashboard.
 
-```
+```js
 let instance = new TextSync({
   instanceLocator: INSTANCE_LOCATOR,
   key: KEY,
@@ -38,7 +38,7 @@ let instance = new TextSync({
 
 ## Authorization
 
-```
+```js
 instance.authorizeDocument(requestData, permissionsFn);
 ```
 
@@ -53,7 +53,7 @@ instance.authorizeDocument(requestData, permissionsFn);
 
 ## Example
 
-```
+```js
 const TextSync = require('textsync-server-node');
 const express = require('express');
 const bodyParser = require('body-parser');
