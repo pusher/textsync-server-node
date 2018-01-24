@@ -31,11 +31,12 @@ export default class TextSync {
   }
 
   authorizeDocument(
-    request: any,
+    requestData: RequestData,
     permissionsFn: PermissionsFunction
-  ): TextSyncAuthResponse {
-    const documentId = request.documentId;
-    const permissions = permissionsFn(documentId);
-    return this.authorizer.authorize(documentId, permissions);
+  ): Promise<TextSyncAuthResponse> {
+    const documentId = requestData.documentId;
+    return permissionsFn(documentId).then(permissions => {
+      return this.authorizer.authorize(documentId, permissions);
+    });
   }
 }
