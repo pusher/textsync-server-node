@@ -30,7 +30,8 @@ app.post('/textsync/tokens', (req, res) => {
     // ..
     return [TextSync.Permissions.READ, TextSync.Permissions.WRITE];
   };
-  let token = textsync.authorizeDocument(req.body, getPermissions);
-  res.send(token);
+  textsync.authorizeDocument(req.body, getPermissions).then(token => {
+    res.send(token);
+  });
 });
 ```

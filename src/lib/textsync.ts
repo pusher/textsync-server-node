@@ -6,7 +6,13 @@ export type TextSyncOptions = {
   locator: string;
   key: string;
 };
-export type PermissionsFunction = (documentId: string) => Permissions[];
+export type PermissionsFunction = (
+  documentId: string
+) => Promise<Permissions[]>;
+
+export interface RequestData {
+  documentId: string;
+}
 
 export default class TextSync {
   instance: Instance;
