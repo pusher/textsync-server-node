@@ -2,6 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var textsync_1 = require("./lib/textsync");
 exports.default = textsync_1.TextSync;
+var permissions_1 = require("./lib/permissions");
+exports.Permissions = permissions_1.Permissions;
 var Permissions = require('./lib/permissions').Permissions;
 var TextSync = require('./lib/textsync').TextSync;
 module.exports = TextSync;
