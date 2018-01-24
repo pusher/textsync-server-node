@@ -10,13 +10,31 @@
     "pusher-platform-node": "^0.10.0"
   },
   "devDependencies": {
+    "@types/jest": "^22.1.0",
     "@types/node": "^8.0.7",
+    "jest": "^22.1.4",
+    "ts-jest": "^22.0.1",
+    "prettier": "^1.10.2",
     "typescript": "^2.6.2"
   },
-  "scripts" : {
+  "scripts": {
     "build:clean": "rm -rf dist && mkdir -p dist",
     "build:tsc": "tsc",
     "build": "yarn run build:clean && yarn run build:tsc",
-    "dev": "tsc --watch"
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "dev": "tsc --watch",
+    "format": "prettier src/**/*.ts"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "js",
+      "json"
+    ]
   }
 }
