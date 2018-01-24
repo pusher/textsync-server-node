@@ -1,21 +1,66 @@
-# Textsync node Library
+# TextSync node Library
 
-A node.js library to simplify token generation for TextSync authorization endpoints.
+
+Server side library for [TextSync](https://pusher.com/textsync).  It's useful
+for generating tokens in the format expected by the TextSync client library
+when an authorization endpoint is configured.
+
+# Usage
+## Importing
+
+It's possible to import `textsync-server-node` using ES6 modules.
+
+```
+import TextSync from 'textsync-server-node';
+```
+
+Commonjs is supported too
+
+```
+const TextSync = require('textsync-server-node');
+```
 
 ## Instantiation
 
+The constructor takes a single options object with the following required keys:
+
+- `instanceLocator`
+- `key`
+
+Both of which should be available from the keys page of your TextSync dashboard.
+
 ```
-const TextSync = require('textsync-server-node');
-let textsync = new TextSync({
-  locator: INSTANCE_LOCATOR,
+let instance = new TextSync({
+  instanceLocator: INSTANCE_LOCATOR,
   key: KEY,
 });
-````
+```
 
-## Authorisation Endpoint
+## Authorization
+
+```
+instance.authorizeDocument(requestData, permissionsFn);
+```
+
+- `requestData` - usually the body of the request from the client library but
+  just needs to be an object containing a `documentId`.
+- `permissionsFn` - a function returning a promise resolving to the permissions
+  the user making the request has to `documentId`. The library exposes the
+  available permissions (at present there is only `TextSync.Permissions.READ`
+  and `TextSync.Permissions.Write`)
+
+
+
+## Example
 
 ```
 const TextSync = require('textsync-server-node');
+const express = require('express');
+const bodyParser = require('body-parser');
+
+const app = express();
+app.use(bodyParser.json());
+
 
 let textsync = new TextSync({
   locator: INSTANCE_LOCATOR,

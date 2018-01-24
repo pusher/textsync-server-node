@@ -3,7 +3,7 @@ import { Permissions } from './permissions';
 import { default as Authorizer, TextSyncAuthResponse } from './authorizer';
 
 export type TextSyncOptions = {
-  locator: string;
+  instanceLocator: string;
   key: string;
 };
 export type PermissionsFunction = (
@@ -18,14 +18,13 @@ export class TextSync {
   instance: Instance;
   authorizer: Authorizer;
 
-  constructor(options: TextSyncOptions) {
-    let instanceOptions: InstanceOptions = Object.assign(
-      {
-        serviceName: 'textsync',
-        serviceVersion: 'v1'
-      },
-      options
-    );
+  constructor({ instanceLocator, key }: TextSyncOptions) {
+    let instanceOptions: InstanceOptions = {
+      serviceName: 'textsync',
+      serviceVersion: 'v1',
+      locator: instanceLocator,
+      key
+    };
     this.instance = new Instance(instanceOptions);
     this.authorizer = new Authorizer(this.instance);
   }

@@ -2,7 +2,7 @@ import { Instance } from 'pusher-platform-node';
 import { Permissions } from './permissions';
 import { default as Authorizer, TextSyncAuthResponse } from './authorizer';
 export declare type TextSyncOptions = {
-    locator: string;
+    instanceLocator: string;
     key: string;
 };
 export declare type PermissionsFunction = (documentId: string) => Promise<Permissions[]>;
@@ -12,6 +12,6 @@ export interface RequestData {
 export declare class TextSync {
     instance: Instance;
     authorizer: Authorizer;
-    constructor(options: TextSyncOptions);
+    constructor({instanceLocator, key}: TextSyncOptions);
     authorizeDocument(requestData: RequestData, permissionsFn: PermissionsFunction): Promise<TextSyncAuthResponse>;
 }

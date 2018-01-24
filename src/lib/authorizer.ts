@@ -23,9 +23,7 @@ export default class Authorizer {
     permissions: Permissions[],
     options?: AuthoriseOptions
   ): AuthenticationResponse {
-    let opts = {
-      serviceClaims: { ...this.buildServiceClaims(documentId, permissions) }
-    };
-    return this.instance.authenticate(DEFAULT_PAYLOAD, opts);
+    const serviceClaims = this.buildServiceClaims(documentId, permissions);
+    return this.instance.authenticate(DEFAULT_PAYLOAD, { serviceClaims });
   }
 }
