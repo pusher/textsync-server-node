@@ -14,7 +14,7 @@ export interface RequestData {
   documentId: string;
 }
 
-export default class TextSync {
+export class TextSync {
   instance: Instance;
   authorizer: Authorizer;
 

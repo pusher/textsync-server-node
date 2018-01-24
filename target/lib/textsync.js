@@ -20,4 +20,4 @@ var TextSync = /** @class */ (function () {
     };
     return TextSync;
 }());
-exports.default = TextSync;
+exports.TextSync = TextSync;

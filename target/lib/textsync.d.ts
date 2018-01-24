@@ -9,7 +9,7 @@ export declare type PermissionsFunction = (documentId: string) => Promise<Permis
 export interface RequestData {
     documentId: string;
 }
-export default class TextSync {
+export declare class TextSync {
     instance: Instance;
     authorizer: Authorizer;
     constructor(options: TextSyncOptions);
