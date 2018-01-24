@@ -6,6 +6,7 @@
   "repository": "https://github.com/pusher/textsync-server-node",
   "author": "pusher",
   "license": "MIT",
+  "types": "target/index.d.ts",
   "dependencies": {
     "pusher-platform-node": "^0.10.0"
   },
