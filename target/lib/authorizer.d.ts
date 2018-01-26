@@ -1,7 +1,7 @@
 import { Instance, AuthenticationResponse } from 'pusher-platform-node';
 import { Permissions } from './permissions';
 export declare type TextSyncAuthResponse = AuthenticationResponse;
-export declare type AuthoriseOptions = {
+export declare type AuthorizeOptions = {
     tokenExpiry?: number;
 };
 export default class Authorizer {
@@ -13,5 +13,5 @@ export default class Authorizer {
             permissions: Permissions[];
         };
     };
-    authorize(documentId: string, permissions: Permissions[], options?: AuthoriseOptions): AuthenticationResponse;
+    authorize(documentId: string, permissions: Permissions[], options: AuthorizeOptions): AuthenticationResponse;
 }

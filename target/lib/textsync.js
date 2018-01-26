@@ -14,11 +14,15 @@ var TextSync = /** @class */ (function () {
         this.instance = new pusher_platform_node_1.Instance(instanceOptions);
         this.authorizer = new authorizer_1.default(this.instance);
     }
-    TextSync.prototype.authorizeDocument = function (requestData, permissionsFn) {
+    TextSync.prototype.authorizeDocument = function (requestData, permissionsFn, options) {
         var _this = this;
         var documentId = requestData.documentId;
+        var authorizeOpts = {};
+        if (options && options.tokenExpiry) {
+            authorizeOpts.tokenExpiry = options.tokenExpiry;
+        }
         return permissionsFn(documentId).then(function (permissions) {
-            return _this.authorizer.authorize(documentId, permissions);
+            return _this.authorizer.authorize(documentId, permissions, options);
         });
     };
     return TextSync;
