@@ -1,6 +1,10 @@
 import { Instance, InstanceOptions } from 'pusher-platform-node';
 import { Permissions } from './permissions';
-import { default as Authorizer, TextSyncAuthResponse } from './authorizer';
+import {
+  default as Authorizer,
+  TextSyncAuthResponse,
+  AuthorizeOptions
+} from './authorizer';
 
 export type TextSyncOptions = {
   instanceLocator: string;
@@ -31,11 +35,16 @@ export class TextSync {
 
   authorizeDocument(
     requestData: RequestData,
-    permissionsFn: PermissionsFunction
+    permissionsFn: PermissionsFunction,
+    options?: AuthorizeOptions
   ): Promise<TextSyncAuthResponse> {
     const documentId = requestData.documentId;
+    let authorizeOpts: AuthorizeOptions = {};
+    if (options && options.tokenExpiry) {
+      authorizeOpts.tokenExpiry = options.tokenExpiry;
+    }
     return permissionsFn(documentId).then(permissions => {
-      return this.authorizer.authorize(documentId, permissions);
+      return this.authorizer.authorize(documentId, permissions, options);
     });
   }
 }

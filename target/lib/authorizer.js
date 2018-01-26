@@ -10,7 +10,11 @@ var Authorizer = /** @class */ (function () {
     };
     Authorizer.prototype.authorize = function (documentId, permissions, options) {
         var serviceClaims = this.buildServiceClaims(documentId, permissions);
-        return this.instance.authenticate(DEFAULT_PAYLOAD, { serviceClaims: serviceClaims });
+        var authenticateOptions = { serviceClaims: serviceClaims };
+        if (options.tokenExpiry) {
+            authenticateOptions['tokenExpiry'] = options.tokenExpiry;
+        }
+        return this.instance.authenticate(DEFAULT_PAYLOAD, authenticateOptions);
     };
     return Authorizer;
 }());

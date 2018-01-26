@@ -39,16 +39,16 @@ let instance = new TextSync({
 ## Authorization
 
 ```js
-instance.authorizeDocument(requestData, permissionsFn);
+instance.authorizeDocument(requestData, permissionsFn, options);
 ```
 
-- `requestData` - usually the body of the request from the client library but
-  just needs to be an object containing a `documentId`.
-- `permissionsFn` - a function returning a promise resolving to the permissions
+- `requestData` (required) - body of the request from the client library
+- `permissionsFn` (required) - a function returning a promise resolving to the permissions
   the user making the request has to `documentId`. The library exposes the
   available permissions (at present there is only `TextSync.Permissions.READ`
   and `TextSync.Permissions.Write`)
-
+- `options` (optional) - an object containing authorization options. At present
+  the only option available `tokenExpiry`
 
 
 ## Example
@@ -75,7 +75,8 @@ app.post('/textsync/tokens', (req, res) => {
     // ..
     return [TextSync.Permissions.READ, TextSync.Permissions.WRITE];
   };
-  textsync.authorizeDocument(req.body, getPermissions).then(token => {
+  const options = { tokenExpiry: (60 * 15) }; // 15 minutes;
+  textsync.authorizeDocument(req.body, getPermissions, options).then(token => {
     res.send(token);
   });
 });

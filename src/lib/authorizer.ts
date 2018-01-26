@@ -4,8 +4,8 @@ import { Permissions } from './permissions';
 const DEFAULT_PAYLOAD = { grant_type: 'client_credentials' };
 
 export type TextSyncAuthResponse = AuthenticationResponse;
-export type AuthoriseOptions = {
-  tokenExpiry?: number; // this is not yet implemented
+export type AuthorizeOptions = {
+  tokenExpiry?: number;
 };
 
 export default class Authorizer {
@@ -21,9 +21,13 @@ export default class Authorizer {
   authorize(
     documentId: string,
     permissions: Permissions[],
-    options?: AuthoriseOptions
+    options: AuthorizeOptions
   ): AuthenticationResponse {
     const serviceClaims = this.buildServiceClaims(documentId, permissions);
-    return this.instance.authenticate(DEFAULT_PAYLOAD, { serviceClaims });
+    let authenticateOptions = { serviceClaims };
+    if (options.tokenExpiry) {
+      authenticateOptions['tokenExpiry'] = options.tokenExpiry;
+    }
+    return this.instance.authenticate(DEFAULT_PAYLOAD, authenticateOptions);
   }
 }

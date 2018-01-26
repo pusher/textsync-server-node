@@ -5,7 +5,7 @@ export {
   RequestData
 } from './lib/textsync';
 
-export { TextSyncAuthResponse } from './lib/authorizer';
+export { TextSyncAuthResponse, AuthorizeOptions } from './lib/authorizer';
 export { Permissions } from './lib/permissions';
 
 const { Permissions } = require('./lib/permissions');
