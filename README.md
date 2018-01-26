@@ -1,4 +1,4 @@
-# TextSync node Library
+# TextSync Node Library
 
 
 Server side library for [TextSync](https://pusher.com/textsync).  It's useful
