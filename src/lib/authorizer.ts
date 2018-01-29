@@ -14,16 +14,16 @@ export default class Authorizer {
     this.instance = instance;
   }
 
-  buildServiceClaims(documentId: string, permissions: Permissions[]) {
-    return { textsync: { documentId, permissions } };
+  buildServiceClaims(docId: string, permissions: Permissions[]) {
+    return { textsync: { docId, permissions } };
   }
 
   authorize(
-    documentId: string,
+    docId: string,
     permissions: Permissions[],
     options: AuthorizeOptions
   ): AuthenticationResponse {
-    const serviceClaims = this.buildServiceClaims(documentId, permissions);
+    const serviceClaims = this.buildServiceClaims(docId, permissions);
     let authenticateOptions = { serviceClaims };
     if (options.tokenExpiry) {
       authenticateOptions['tokenExpiry'] = options.tokenExpiry;
