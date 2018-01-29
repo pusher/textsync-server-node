@@ -14,7 +14,7 @@ It's possible to import `textsync-server-node` using ES6 modules.
 import TextSync from 'textsync-server-node';
 ```
 
-Commonjs is supported too
+Commonjs is supported too.
 
 ```js
 const TextSync = require('textsync-server-node');
@@ -44,9 +44,9 @@ instance.authorizeDocument(requestData, permissionsFn, options);
 
 - `requestData` (required) - body of the request from the client library
 - `permissionsFn` (required) - a function returning a promise resolving to the permissions
-  the user making the request has to `documentId`. The library exposes the
+  the user making the request has to `docId`. The library exposes the
   available permissions (at present there is only `TextSync.Permissions.READ`
-  and `TextSync.Permissions.Write`)
+  and `TextSync.Permissions.WRITE`)
 - `options` (optional) - an object containing authorization options. At present
   the only option available `tokenExpiry`
 
@@ -62,21 +62,22 @@ const app = express();
 app.use(bodyParser.json());
 
 
-let textsync = new TextSync({
+let textSync = new TextSync({
   locator: INSTANCE_LOCATOR,
   key: KEY,
 });
 
 app.post('/textsync/tokens', (req, res) => {
-  const getPermissions = documentId => {
-    // some logic to determine the rights the client req originates from has
-    // ..
-    // ..
-    // ..
-    return [TextSync.Permissions.READ, TextSync.Permissions.WRITE];
+  const getPermissions = docId => {
+    return new Promise((resolve, reject) => {
+      // Some async logic to determine what permissions the user has
+      //
+      // Permissions are modelled as an array of TextSync.Permissions exports
+      resolve([TextSync.Permissions.READ, TextSync.Permissions.WRITE]);
+    });
   };
   const options = { tokenExpiry: (60 * 15) }; // 15 minutes;
-  textsync.authorizeDocument(req.body, getPermissions, options).then(token => {
+  textSync.authorizeDocument(req.body, getPermissions, options).then(token => {
     res.send(token);
   });
 });

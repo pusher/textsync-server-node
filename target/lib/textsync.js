@@ -16,13 +16,13 @@ var TextSync = /** @class */ (function () {
     }
     TextSync.prototype.authorizeDocument = function (requestData, permissionsFn, options) {
         var _this = this;
-        var documentId = requestData.documentId;
+        var docId = requestData.docId;
         var authorizeOpts = {};
         if (options && options.tokenExpiry) {
             authorizeOpts.tokenExpiry = options.tokenExpiry;
         }
-        return permissionsFn(documentId).then(function (permissions) {
-            return _this.authorizer.authorize(documentId, permissions, options);
+        return permissionsFn(docId).then(function (permissions) {
+            return _this.authorizer.authorize(docId, permissions, authorizeOpts);
         });
     };
     return TextSync;

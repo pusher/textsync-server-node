@@ -10,12 +10,10 @@ export type TextSyncOptions = {
   instanceLocator: string;
   key: string;
 };
-export type PermissionsFunction = (
-  documentId: string
-) => Promise<Permissions[]>;
+export type PermissionsFunction = (docId: string) => Promise<Permissions[]>;
 
 export interface RequestData {
-  documentId: string;
+  docId: string;
 }
 
 export class TextSync {
@@ -38,13 +36,13 @@ export class TextSync {
     permissionsFn: PermissionsFunction,
     options?: AuthorizeOptions
   ): Promise<TextSyncAuthResponse> {
-    const documentId = requestData.documentId;
+    const docId = requestData.docId;
     let authorizeOpts: AuthorizeOptions = {};
     if (options && options.tokenExpiry) {
       authorizeOpts.tokenExpiry = options.tokenExpiry;
     }
-    return permissionsFn(documentId).then(permissions => {
-      return this.authorizer.authorize(documentId, permissions, options);
+    return permissionsFn(docId).then(permissions => {
+      return this.authorizer.authorize(docId, permissions, authorizeOpts);
     });
   }
 }

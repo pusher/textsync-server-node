@@ -5,9 +5,9 @@ export declare type TextSyncOptions = {
     instanceLocator: string;
     key: string;
 };
-export declare type PermissionsFunction = (documentId: string) => Promise<Permissions[]>;
+export declare type PermissionsFunction = (docId: string) => Promise<Permissions[]>;
 export interface RequestData {
-    documentId: string;
+    docId: string;
 }
 export declare class TextSync {
     instance: Instance;

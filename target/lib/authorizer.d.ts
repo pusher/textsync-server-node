@@ -7,11 +7,11 @@ export declare type AuthorizeOptions = {
 export default class Authorizer {
     instance: Instance;
     constructor(instance: Instance);
-    buildServiceClaims(documentId: string, permissions: Permissions[]): {
+    buildServiceClaims(docId: string, permissions: Permissions[]): {
         textsync: {
-            documentId: string;
+            docId: string;
             permissions: Permissions[];
         };
     };
-    authorize(documentId: string, permissions: Permissions[], options: AuthorizeOptions): AuthenticationResponse;
+    authorize(docId: string, permissions: Permissions[], options: AuthorizeOptions): AuthenticationResponse;
 }
