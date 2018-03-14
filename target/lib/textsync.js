@@ -21,7 +21,7 @@ var TextSync = /** @class */ (function () {
         if (options && options.tokenExpiry) {
             authorizeOpts.tokenExpiry = options.tokenExpiry;
         }
-        return permissionsFn(docId).then(function (permissions) {
+        return Promise.resolve(permissionsFn(docId)).then(function (permissions) {
             return _this.authorizer.authorize(docId, permissions, authorizeOpts);
         });
     };

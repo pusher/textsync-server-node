@@ -41,7 +41,8 @@ export class TextSync {
     if (options && options.tokenExpiry) {
       authorizeOpts.tokenExpiry = options.tokenExpiry;
     }
-    return permissionsFn(docId).then(permissions => {
+
+    return Promise.resolve(permissionsFn(docId)).then(permissions => {
       return this.authorizer.authorize(docId, permissions, authorizeOpts);
     });
   }
