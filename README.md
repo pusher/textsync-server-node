@@ -1,5 +1,8 @@
-# TextSync Node Library
+# Deprecated
 
+The TextSync service has been deprecated.
+
+# TextSync Node Library
 
 Server side library for [TextSync](https://pusher.com/textsync).  It's useful
 for generating tokens in the format expected by the TextSync client library
